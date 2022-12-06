@@ -9,7 +9,7 @@ urls = []
 
 
 def create_dir():
-    path = 'C:/Users/0/python_var_4/Lab1'
+    path = 'C:/Users/0/python_var_7/Lab1'
     folders = ['zebra', 'bay horse']
 
     if not os.path.exists(path):
@@ -88,7 +88,7 @@ create_dir()
 i = 0
 page = 0
 number = 0
-directory_zebra = 'C:/Users/0/python_var_4/Lab1/zebra'
+directory_zebra = 'C:/Users/0/python_var_7/Lab1/zebra'
 
 
 """
@@ -116,7 +116,7 @@ time sleep func we use to avoid blocking because of too much requests to server
 i = 0
 page = 0
 number = 0
-directory_bay_horse = 'C:/Users/0/python_var_4/Lab1/bay_horse'
+directory_bay_horse = 'C:/Users/0/python_var_7/Lab1/bay_horse'
 while number < 1050:
     url_bay_horse = 'https://yandex.by/images/search?p=' + str(page) + '&text=bay horse'
     parce(url_bay_horse, directory_bay_horse)
