@@ -10,7 +10,7 @@ urls = []
 
 def create_dir():
     path = 'C:/Users/0/python_var_4/Lab1'
-    folders = ['tulip', 'rose']
+    folders = ['zebra', 'bay horse']
 
     if not os.path.exists(path):
         os.mkdir(path)
