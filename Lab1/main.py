@@ -1,35 +1,45 @@
 import os
-import shutil
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 
-folders = ['zebra', 'bay_horse']
-HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36", 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'one': 'true'}
+FOLDERS = ['zebra', 'bay_horse']
+HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                         "(KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
+                         'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'one': 'true'}
 
 
-def create_dir(path):
+def create_dir(path) -> None:
+    """
+    :param path: path to directory
+    :return: none
+    """
     try:
         os.mkdir(path)
     except OSError:
-        shutil.rmtree(path)
-        os.mkdir(path)
-
-    for f in folders:
+        print('Error: impossible to make directory')
+    for f in FOLDERS:
         folder = os.path.join(path, f)
         try:
             os.mkdir(folder)
         except OSError:
-            shutil.rmtree(folder)
-            os.mkdir(folder)
+            print('Error: impossible to make directory')
 
 
-def is_valid(url):
+def is_valid(url) -> bool:
+    """
+    :param url: url of image
+    :return: bool
+    """
     parsed = urlparse(url)
     return bool(parsed.netloc) and bool(parsed.scheme)
 
 
-def get_all_images(url):
+def get_all_images(url) -> list:
+    """
+    :param url: url of yandex search
+    :return: list
+    """
     urls = []
     html_page = requests.get(url, HEADERS)
     html = BeautifulSoup(html_page.content, "html.parser")
@@ -43,26 +53,38 @@ def get_all_images(url):
     return urls
 
 
-def download(url, pathname, i):
+def download(url, pathname, i) -> None:
+    """
+    :param url: url of image
+    :param pathname: path to folder
+    :param i: counter of names of files
+    :return: none
+    """
+
     request_img = requests.get(url)
-    with open(pathname + "/" + str(i).zfill(4) + ".jpg", "wb"):
-        save = open(pathname + "/" + str(i).zfill(4) + ".jpg", "wb")
+    with open(os.path.join(pathname, "/", str(i).zfill(4), ".jpg"), "wb") as save:
         save.write(request_img.content)
         save.close()
 
 
-def parse(name):
+def parse(name, path='C:/Users/0/python_var_7/dataset/', url='https://yandex.ru/images/') -> None:
+    """
+    :param url: yandex images
+    :param name: searching name
+    :param path: path to folder
+    :return: none
+    """
     i = 0
     page = 0
-    while len(os.listdir(os.path.join('C:/Users/0/python_var_7/dataset/', name))) < 1000:
-        imgs = get_all_images(f"https://yandex.by/images/search?p=, {str(page)}, &text=, {name}")
+    while len(os.listdir(os.path.join(path, name))) < 1000:
+        imgs = get_all_images(f"{url}search?p={str(page)}&text={name}")
         for img in imgs:
-            download(img, os.path.join('C:/Users/0/python_var_7/dataset/', name), i)
+            download(img, os.path.join(path, name), i)
             i += 1
         page += 1
 
 
 if __name__ == "__main__":
     create_dir('C:/Users/0/python_var_7/dataset')
-    parse('zebra')
-    parse('bay_horse')
+    parse(FOLDERS[0])
+    parse(FOLDERS[1])
