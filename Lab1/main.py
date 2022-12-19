@@ -9,24 +9,24 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
                          'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'one': 'true'}
 
 
-def create_dir(path) -> None:
+def create_dir(path:str) -> None:
     """
     :param path: path to directory
     :return: none
     """
     try:
         os.mkdir(path)
-    except OSError:
-        print('Error: impossible to make directory')
+    except OSError as err:
+        print("OS error:", err)
     for f in FOLDERS:
         folder = os.path.join(path, f)
         try:
             os.mkdir(folder)
-        except OSError:
-            print('Error: impossible to make directory')
+        except OSError as err:
+            print("OS error:", err)
 
 
-def is_valid(url) -> bool:
+def is_valid(url:str) -> bool:
     """
     :param url: url of image
     :return: bool
@@ -35,7 +35,7 @@ def is_valid(url) -> bool:
     return bool(parsed.netloc) and bool(parsed.scheme)
 
 
-def get_all_images(url) -> list:
+def get_all_images(url:str) -> list:
     """
     :param url: url of yandex search
     :return: list
@@ -53,21 +53,19 @@ def get_all_images(url) -> list:
     return urls
 
 
-def download(url, pathname, i) -> None:
+def download(url:str, pathname:str, i:int) -> None:
     """
     :param url: url of image
     :param pathname: path to folder
     :param i: counter of names of files
     :return: none
     """
-
     request_img = requests.get(url)
-    with open(os.path.join(pathname, "/", str(i).zfill(4), ".jpg"), "wb") as save:
+    with open(os.path.join(pathname, str(i).zfill(4), ".jpg"), "wb") as save:
         save.write(request_img.content)
-        save.close()
 
 
-def parse(name, path='C:/Users/0/python_var_7/dataset/', url='https://yandex.ru/images/') -> None:
+def parse(name:str, path:str, url='https://yandex.ru/images/') -> None:
     """
     :param url: yandex images
     :param name: searching name
@@ -82,9 +80,10 @@ def parse(name, path='C:/Users/0/python_var_7/dataset/', url='https://yandex.ru/
             download(img, os.path.join(path, name), i)
             i += 1
         page += 1
+        print(f'Downloaded {i + 1} images')
 
 
 if __name__ == "__main__":
     create_dir('C:/Users/0/python_var_7/dataset')
-    parse(FOLDERS[0])
-    parse(FOLDERS[1])
+    parse(FOLDERS[0], 'C:/Users/0/python_var_7/dataset/')
+    parse(FOLDERS[1], 'C:/Users/0/python_var_7/dataset/')
