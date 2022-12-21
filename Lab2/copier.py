@@ -5,7 +5,8 @@ from main import Data
 
 def create_dir(obj: type(Data), path: str) -> None:
     """
-    создание новой директории
+    :param obj: object Data class
+    :param path: new dir path
     """
     try:
         os.mkdir(os.path.join(path, "new_dataset"))
@@ -18,9 +19,9 @@ def create_dir(obj: type(Data), path: str) -> None:
 
 def replace_dir(obj: type(Data), path: str, class_name) -> None:
     """
-    функция создает новую директорию, перенося из старой все файлы с именами, начинающимися с class_name
-    в конце добавляет информацию в аннотацию
-    prev_dir - начальная директория, нужно запомнить
+    :param obj: object Data class
+    :param path: new dir path
+    :param class_name: class name
     """
     prev_dir = obj.directory
     create_dir(obj, path)

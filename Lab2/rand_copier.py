@@ -7,8 +7,9 @@ from main import Data
 
 def rand_copier(obj: type(Data), path: str, class_name) -> None:
     """
-    функция переносит файлы в новую директорию с рандомными именами, в конце добавляет в файл-аннотацию
-    prev_dir - начальная директория, нужно запомнить
+    :param obj: object Data class
+    :param path: new dir path
+    :param class_name: class name
     """
     prev_dir = obj.directory
     create_dir(obj, path)
