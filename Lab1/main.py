@@ -9,7 +9,7 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
                          'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'one': 'true'}
 
 
-def create_dir(path:str) -> None:
+def create_dir(path: str) -> None:
     """
     :param path: path to directory
     :return: none
@@ -18,15 +18,16 @@ def create_dir(path:str) -> None:
         os.mkdir(path)
     except OSError as err:
         print("OS error:", err)
-    for f in FOLDERS:
-        folder = os.path.join(path, f)
-        try:
-            os.mkdir(folder)
-        except OSError as err:
-            print("OS error:", err)
+    else:
+        for f in FOLDERS:
+            folder = os.path.join(path, f)
+            try:
+                os.mkdir(folder)
+            except OSError as err:
+                print("OS error:", err)
 
 
-def is_valid(url:str) -> bool:
+def is_valid(url: str) -> bool:
     """
     :param url: url of image
     :return: bool
@@ -35,7 +36,7 @@ def is_valid(url:str) -> bool:
     return bool(parsed.netloc) and bool(parsed.scheme)
 
 
-def get_all_images(url:str) -> list:
+def get_all_images(url: str) -> list:
     """
     :param url: url of yandex search
     :return: list
@@ -53,7 +54,7 @@ def get_all_images(url:str) -> list:
     return urls
 
 
-def download(url:str, pathname:str, i:int) -> None:
+def download(url: str, pathname: str, i: int) -> None:
     """
     :param url: url of image
     :param pathname: path to folder
@@ -65,8 +66,9 @@ def download(url:str, pathname:str, i:int) -> None:
         save.write(request_img.content)
 
 
-def parse(name:str, path:str, url='https://yandex.ru/images/') -> None:
+def parse(name: str, path: str, url: str = 'https://yandex.ru/images/', value: int = 1000) -> None:
     """
+    :param value: number of images, we need to download
     :param url: yandex images
     :param name: searching name
     :param path: path to folder
@@ -74,16 +76,18 @@ def parse(name:str, path:str, url='https://yandex.ru/images/') -> None:
     """
     i = 0
     page = 0
-    while len(os.listdir(os.path.join(path, name))) < 1000:
+    while len(os.listdir(os.path.join(path, name))) < value:
         imgs = get_all_images(f"{url}search?p={str(page)}&text={name}")
         for img in imgs:
             download(img, os.path.join(path, name), i)
             i += 1
         page += 1
         print(f'Downloaded {i + 1} images')
+    print(f'Process finished!')
 
 
 if __name__ == "__main__":
-    create_dir('C:/Users/0/python_var_7/dataset')
-    parse(FOLDERS[0], 'C:/Users/0/python_var_7/dataset/')
-    parse(FOLDERS[1], 'C:/Users/0/python_var_7/dataset/')
+    path: str = 'C:/Users/0/python_var_7/dataset'
+    create_dir(path)
+    parse(FOLDERS[0], path)
+    parse(FOLDERS[1], path)
