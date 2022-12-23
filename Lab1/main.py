@@ -25,6 +25,7 @@ def create_dir(path: str) -> None:
                 os.mkdir(folder)
             except OSError as err:
                 print("OS error:", err)
+                break
 
 
 def is_valid(url: str) -> bool:
@@ -83,7 +84,7 @@ def parse(name: str, path: str, url: str = 'https://yandex.ru/images/', value: i
             i += 1
         page += 1
         print(f'Downloaded {i + 1} images')
-    print(f'Process finished!')
+    print('Process finished!')
 
 
 if __name__ == "__main__":
