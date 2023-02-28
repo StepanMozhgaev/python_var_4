@@ -1,6 +1,6 @@
 import os
 import shutil
-from main import Data
+from Data import Data
 
 
 def create_dir(obj: type(Data), path: str) -> None:
@@ -31,5 +31,11 @@ def replace_dir(obj: type(Data), path: str, class_name) -> None:
             os.rename(os.path.join(path, obj.directory, f'{(i+1):04d}.jpg'),
                       os.path.join(path, obj.directory, f'{class_name}_{(i+1):04d}.jpg'))
             obj.adder(path, class_name, f'{class_name}_{(i+1):04d}.jpg')
-        except OSError:
-            print("No files found")
+        except OSError as err:
+            print(err)
+
+
+if __name__ == "__main__":
+    obj = Data("C:\\Users\\0\\python_var_7\\dataset\\")
+    replace_dir(obj, "C:\\Users\\0\\python_var_7\\dataset\\", "zebra")
+    replace_dir(obj, "C:\\Users\\0\\python_var_7\\dataset\\", "bay horse")

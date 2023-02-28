@@ -2,7 +2,7 @@ import os
 import random
 from copier import create_dir
 import shutil
-from main import Data
+from Data import Data
 
 
 def rand_copier(obj: type(Data), path: str, class_name) -> None:
@@ -23,5 +23,11 @@ def rand_copier(obj: type(Data), path: str, class_name) -> None:
                       os.path.join(path, obj.directory, f'{n:05d}.jpg'))
             obj.adder(path, class_name, f'{n:05d}.jpg')
             allowed_values.remove(n)
-        except OSError:
-            print("Some error")
+        except OSError as err:
+            print(err)
+
+
+if __name__ == "__main__":
+    obj = Data("C:\\Users\\0\\python_var_7\\dataset\\")
+    rand_copier(obj, "C:\\Users\\0\\python_var_7\\dataset\\", "zebra")
+    rand_copier(obj, "C:\\Users\\0\\python_var_7\\dataset\\", "bay horse")

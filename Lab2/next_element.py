@@ -19,3 +19,7 @@ def next_element(path: str) -> str | None:
             return None
     else:
         return "No files found"
+
+
+if __name__ == "__main__":
+    print(next_element("C:\\Users\\0\\python_var_7\\dataset\\zebra\\0001.jpg"))
