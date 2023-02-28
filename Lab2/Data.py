@@ -18,7 +18,8 @@ class Data:
         :param class_name: class name
         :param img_name: image name
         """
-        with open(os.path.join(path, self.directory, "annotation.csv"), "a", encoding="utf-8", newline="") as file:
+        annotation_path = os.path.join(path, self.directory, "annotation.csv")
+        with open(annotation_path, "a", encoding="utf-8", newline="") as file:
             writer = csv.writer(file, quoting=csv.QUOTE_ALL)
             while self.str_num == 0:
                 writer.writerow([

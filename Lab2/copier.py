@@ -11,10 +11,8 @@ def create_dir(obj: type(Data), path: str) -> None:
     try:
         os.mkdir(os.path.join(path, "new_dataset"))
         obj.directory = "new_dataset"
-    except OSError:
-        shutil.rmtree(os.path.join(path, "new_dataset"))
-        os.mkdir(os.path.join(path, "new_dataset"))
-        obj.directory = "new_dataset"
+    except OSError as err:
+        print(err)
 
 
 def replace_dir(obj: type(Data), path: str, class_name) -> None:
