@@ -57,10 +57,8 @@ class Interface(QMainWindow):
             self.d_text, self.ok = QInputDialog.getText(self, "Аннотация", "Введите путь для сохранения:")
             print(self.d_text)
 
-        directory = f"{self.w_text.text()}zebra"
-        copy.copy_dataset(directory, self.d_text, "zebra")
-        directory = f"{self.w_text.text()}bay_horse"
-        copy.copy_dataset(directory, self.d_text, "bay horse")
+        copy.copy_dataset(os.path.join(self.w_text.text(), "zebra"), self.d_text, "zebra")
+        copy.copy_dataset(os.path.join(self.w_text.text(), "bay_horse"), self.d_text, "bay horse")
 
     def click_copy(self):
         if not self.w_text.text():
@@ -74,10 +72,8 @@ class Interface(QMainWindow):
             self.d_text, self.ok = QInputDialog.getText(self, "Копирование", "Введите путь для копирования:")
             print(self.d_text)
 
-            directory = f"{self.w_text.text()}zebra"
-            copy.copy_dataset(directory, self.d_text, "zebra")
-            directory = f"{self.w_text.text()}bay_horse"
-            copy.copy_dataset(directory, self.d_text, "bay horse")
+            copy.copy_dataset(os.path.join(self.w_text.text(), "zebra"), self.d_text, "zebra")
+            copy.copy_dataset(os.path.join(self.w_text.text(), "bay_horse"), self.d_text, "bay horse")
 
     def click_rand(self):
         if not self.w_text.text():
@@ -93,10 +89,8 @@ class Interface(QMainWindow):
                                                         "Введите путь для копирования:")
             print(self.d_text)
 
-            directory = f"{self.w_text.text()}zebra"
-            copy.copy_dataset(directory, self.d_text, "zebra")
-            directory = f"{self.w_text.text()}bay_horse"
-            copy.copy_dataset(directory, self.d_text, "bay horse")
+            copy.copy_dataset(os.path.join(self.w_text.text(), "zebra"), self.d_text, "zebra")
+            copy.copy_dataset(os.path.join(self.w_text.text(), "bay_horse"), self.d_text, "bay horse")
 
     def click_img(self):
         self.w = New_Interface()
