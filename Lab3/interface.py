@@ -142,8 +142,9 @@ class New_Interface(QMainWindow):
         self.button2.clicked.connect(self.click_bay_horse)
         self.button2.adjustSize()
 
-        self.zebra = iter.Iterator("C:\\Users\\0\\python_var_7\\Lab3\\dataset_2\\copy.csv", "zebra")
-        self.bay_horse = iter.Iterator("C:\\Users\\0\\python_var_7\\Lab3\\dataset_2\\copy.csv", "bay horse")
+        path = "C:\\Users\\0\\python_var_7\\Lab3\\dataset_2\\copy.csv"
+        self.zebra = iter.Iterator(path, "zebra")
+        self.bay_horse = iter.Iterator(path, "bay horse")
 
         self.show()
 

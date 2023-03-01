@@ -43,7 +43,7 @@ class Iterator:
             raise StopIteration
 
 
-def main():
+def main() -> None:
     s = Iterator("C:\\Users\\0\\python_var_7\\dataset\\copy_patch_1.csv", "zebra")
 
     print(type(next(s)))
