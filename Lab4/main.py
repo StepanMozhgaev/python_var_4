@@ -152,10 +152,12 @@ def hist(data_frame: pd.DataFrame, class_tag: int) -> np.ndarray:
     random.shuffle(path_list)
 
     img = cv2.imread(path_list[0])
+    h = img.shape[0]
+    w = img.shape[1]
     print(path_list[0])
-    hist_b = cv2.calcHist([img], [0], None, [256], [0, 256])
-    hist_g = cv2.calcHist([img], [1], None, [256], [0, 256])
-    hist_r = cv2.calcHist([img], [2], None, [256], [0, 256])
+    hist_b = cv2.calcHist([img], [0], None, [256], [0, 256]) / (h * w)
+    hist_g = cv2.calcHist([img], [1], None, [256], [0, 256]) / (h * w)
+    hist_r = cv2.calcHist([img], [2], None, [256], [0, 256]) / (h * w)
     return hist_b, hist_g, hist_r
 
 
