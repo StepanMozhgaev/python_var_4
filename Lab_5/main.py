@@ -46,6 +46,10 @@ class Mcc(nn.Module):
         self.relu = nn.ReLU()
 
     def forward(self, x) -> tuple:
+    """
+    Мотод определяет, как данные будут ходить по сети
+    х - параметр с входными данными
+    """
         out = self.layer1(x)
         out = self.layer2(out)
         out = self.layer3(out)
@@ -76,6 +80,9 @@ class Dataset(torch.utils.data.Dataset):
 
 
 def network() -> None:
+"""
+Функция создает и обучает модель нейросети, сохраняет результаты в csv-файл и строит графики
+"""
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     torch.manual_seed(1234)
     if device == 'cuda':
